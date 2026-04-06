@@ -14,15 +14,16 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
             color: #2c3e50;
             line-height: 1.6;
         }
 
         /* Header & Navigation */
         header {
-            background: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             position: fixed;
             width: 100%;
             top: 0;
@@ -46,6 +47,7 @@
         .logo-img {
             height: 50px;
             width: auto;
+            border-radius: 12px;
         }
         .logo-text {
             font-weight: bold;
@@ -69,11 +71,13 @@
             text-decoration: none;
             color: #2c3e50;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
         }
 
         .nav-links a:hover, .nav-links a.active {
             color: #00a1ab;
+            border-bottom: 2px solid #00a1ab;
         }
 
         .mobile-menu {
@@ -86,30 +90,44 @@
         .hero {
             background: linear-gradient(135deg, #003f5f 0%, #00a1ab 100%);
             color: white;
-            padding: 7rem 2rem 4rem;
+            padding: 8rem 2rem 5rem;
             text-align: center;
             margin-top: 70px;
+            border-radius: 0 0 50px 50px;
+            position: relative;
+            overflow: hidden;
         }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; position: relative; z-index: 1; }
+        
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 12px 32px;
             background: white;
             color: #003f5f;
             text-decoration: none;
-            border-radius: 30px;
+            border-radius: 40px;
             font-weight: bold;
-            transition: transform 0.3s;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .btn:hover { transform: translateY(-3px); }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         .btn-small {
             padding: 8px 20px;
             font-size: 0.8rem;
@@ -117,13 +135,13 @@
             display: inline-block;
         }
         .btn-submit {
-            background: #00a1ab;
+            background: linear-gradient(135deg, #00a1ab, #003f5f);
             color: white;
             width: 100%;
             margin-top: 1rem;
         }
         .btn-submit:hover {
-            background: #003f5f;
+            transform: translateY(-2px);
         }
 
         /* Container */
@@ -133,12 +151,16 @@
         .section {
             background: white;
             margin: 2rem 0;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border-radius: 30px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .section:hover {
+            transform: translateY(-5px);
         }
         .section-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
             color: #003f5f;
             text-align: center;
@@ -148,41 +170,73 @@
             content: '';
             display: block;
             width: 80px;
-            height: 3px;
-            background: #00a1ab;
+            height: 4px;
+            background: linear-gradient(90deg, #00a1ab, #003f5f);
             margin: 0.5rem auto;
+            border-radius: 2px;
         }
-        .section-subtitle { text-align: center; color: #5d6d7e; margin-bottom: 2rem; }
+        .section-subtitle { text-align: center; color: #5d6d7e; margin-bottom: 2rem; font-size: 1.1rem; }
 
         /* Cards & Grids */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
             gap: 2rem;
             margin-top: 1rem;
         }
         .card {
             background: #fff;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border: 1px solid #eef2f5;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: none;
+            position: relative;
         }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        .card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
         .card-img {
             width: 100%;
             height: 180px;
-            object-fit: cover;
             background: linear-gradient(135deg, #e8f0fe 0%, #d4e6f1 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #003f5f;
-            font-size: 3rem;
+            font-size: 3.5rem;
+            transition: transform 0.3s;
+        }
+        .card:hover .card-img {
+            transform: scale(1.02);
         }
         .card-content { padding: 1.5rem; }
         .card h3 { color: #003f5f; margin-bottom: 0.8rem; font-size: 1.3rem; }
+
+        /* Badges */
+        .badge-license {
+            background: linear-gradient(135deg, #00a1ab20, #003f5f20);
+            color: #003f5f;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .badge-master {
+            background: linear-gradient(135deg, #f39c1220, #e67e2220);
+            color: #e67e22;
+        }
+        .badge-ing {
+            background: linear-gradient(135deg, #3498db20, #2980b920);
+            color: #2980b9;
+        }
+        .badge-doctorat {
+            background: linear-gradient(135deg, #e74c3c20, #c0392b20);
+            color: #c0392b;
+        }
 
         /* Formulaire */
         .form-group {
@@ -197,15 +251,17 @@
         .form-group input, .form-group select {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
             font-size: 1rem;
-            transition: border 0.3s;
+            transition: all 0.3s;
+            background: #f8f9fa;
         }
         .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: #00a1ab;
-            box-shadow: 0 0 0 3px rgba(0,161,171,0.1);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0,161,171,0.1);
         }
         .form-row {
             display: grid;
@@ -213,13 +269,14 @@
             gap: 1rem;
         }
         .success-message {
-            background: #d4edda;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
             color: #155724;
             padding: 1rem;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 1rem;
             text-align: center;
             display: none;
+            font-weight: 500;
         }
         .error-message {
             background: #f8d7da;
@@ -229,29 +286,6 @@
             margin-top: 0.3rem;
             font-size: 0.8rem;
             display: none;
-        }
-
-        .badge-license {
-            background: #e8f6f3;
-            color: #00a1ab;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        .badge-master {
-            background: #fff3e0;
-            color: #f39c12;
-        }
-        .badge-ing {
-            background: #e8f0fe;
-            color: #3498db;
-        }
-        .badge-doctorat {
-            background: #fde2e2;
-            color: #e74c3c;
         }
 
         /* Resource Lists */
@@ -264,13 +298,14 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 0.8rem;
-            background: #f8fafc;
+            padding: 0.8rem 1rem;
+            background: #f8f9fa;
             border-radius: 12px;
-            transition: 0.2s;
+            transition: all 0.2s;
             cursor: pointer;
+            border-left: 3px solid #00a1ab;
         }
-        .resource-item:hover { background: #eef2f5; transform: translateX(5px); }
+        .resource-item:hover { background: #e9ecef; transform: translateX(5px); }
         .resource-item i { font-size: 1.3rem; color: #00a1ab; width: 30px; }
 
         /* Events */
@@ -278,38 +313,22 @@
             display: flex;
             gap: 1.2rem;
             padding: 1rem;
-            border-bottom: 1px solid #eef2f5;
-            transition: 0.2s;
+            border-radius: 16px;
+            transition: all 0.2s;
+            background: #f8f9fa;
+            margin-bottom: 1rem;
         }
-        .event-item:hover { background: #f8fafc; }
+        .event-item:hover { background: #e9ecef; transform: translateX(5px); }
         .event-date {
-            background: #003f5f;
+            background: linear-gradient(135deg, #003f5f, #00a1ab);
             color: white;
             padding: 0.8rem;
             border-radius: 16px;
             text-align: center;
             min-width: 85px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .event-date .day { font-size: 1.5rem; font-weight: bold; }
-
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .stat-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #003f5f;
-        }
 
         /* Footer */
         footer {
@@ -317,6 +336,7 @@
             color: #ecf0f1;
             padding: 3rem 2rem 1rem;
             margin-top: 3rem;
+            border-radius: 30px 30px 0 0;
         }
         .footer-grid {
             max-width: 1300px;
@@ -326,8 +346,8 @@
             gap: 2rem;
         }
         .footer-section h4 { color: #00a1ab; margin-bottom: 1rem; }
-        .social-links a { color: white; margin-right: 1rem; font-size: 1.3rem; transition: color 0.3s; }
-        .social-links a:hover { color: #00a1ab; }
+        .social-links a { color: white; margin-right: 1rem; font-size: 1.3rem; transition: all 0.3s; display: inline-block; }
+        .social-links a:hover { color: #00a1ab; transform: translateY(-3px); }
         .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2c3e50; }
 
         /* Modal */
@@ -344,24 +364,34 @@
         .modal-content {
             background: white;
             padding: 2rem;
-            border-radius: 20px;
+            border-radius: 24px;
             max-width: 500px;
             width: 90%;
             position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         .close-modal {
             position: absolute;
             top: 1rem; right: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
         }
+        .close-modal:hover { color: #003f5f; }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mobile-menu { display: block; }
             .hero h1 { font-size: 1.8rem; }
             .section-title { font-size: 1.6rem; }
             .form-row { grid-template-columns: 1fr; }
+            .cards-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -369,7 +399,7 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="photo/logo.jpg" alt="Logo ISITCOM" class="logo-img" id="logo-placeholder">
+                <img src="photo/logo.jpg" alt="Logo ISITCOM" class="logo-img" id="logo-placeholder" onerror="this.src='https://via.placeholder.com/50x50?text=ISITCOM'">
                 <div class="logo-text">ISITCOM<br><span>Hammam Sousse</span></div>
             </div>
             <ul class="nav-links">
@@ -420,10 +450,10 @@
                         <div class="card-content">
                             <h3>Galerie photos</h3>
                             <p>Découvrez notre campus moderne, nos amphithéâtres et nos laboratoires de pointe.</p>
-                            <div style="display: flex; gap: 5px; margin-top: 10px;">
-                                <img src="https://via.placeholder.com/80x60?text=Campus" style="border-radius: 8px; width: 70px;">
-                                <img src="https://via.placeholder.com/80x60?text=Labo" style="border-radius: 8px; width: 70px;">
-                                <img src="https://via.placeholder.com/80x60?text=Bibliothèque" style="border-radius: 8px; width: 70px;">
+                            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                <img src="https://picsum.photos/id/20/80/60" style="border-radius: 12px; width: 70px; height: 50px; object-fit: cover;">
+                                <img src="https://picsum.photos/id/26/80/60" style="border-radius: 12px; width: 70px; height: 50px; object-fit: cover;">
+                                <img src="https://picsum.photos/id/29/80/60" style="border-radius: 12px; width: 70px; height: 50px; object-fit: cover;">
                             </div>
                         </div>
                     </div>
@@ -439,7 +469,7 @@
                         <div class="card-img"><i class="fas fa-laptop-code fa-4x" style="color:#003f5f;"></i></div>
                         <div class="card-content">
                             <span class="badge-license">Licence Appliquée</span>
-                            <h3>Technologies du Multimédia et du Web</h3>
+                            <h3>Technologies du Multimédia</h3>
                             <p>Formation aux métiers du web : développement front-end/back-end, design UX/UI, création de contenus numériques innovants.</p>
                             <p><strong>📚 Programme :</strong> React, Node.js, PHP, Bases de données, Graphisme 3D, Marketing digital</p>
                             <p><strong>💼 Débouchés :</strong> Développeur full-stack, Chef de projet digital, Concepteur multimédia</p>
@@ -481,17 +511,9 @@
                         <div class="card-content">
                             <span class="badge-license badge-ing">Diplôme National d'Ingénieur</span>
                             <h3>Ingénieur en Téléinformatique</h3>
-                            <p><strong>📌 Présentation :</strong> Formation d'excellence de 3 ans (cycle intégré) combinant l'informatique et les télécommunications. Unique en Tunisie, ce diplôme forme des ingénieurs polyvalents capables de concevoir, déployer et gérer des infrastructures de télécommunications avancées et des systèmes informatiques complexes.</p>
-                            <p><strong>📚 Programme principal :</strong></p>
-                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                <li>Réseaux avancés (5G, SDN, NFV)</li>
-                                <li>Sécurité des systèmes d'information</li>
-                                <li>Cloud Computing & Virtualisation</li>
-                                <li>Intelligence Artificielle & Data Science</li>
-                                <li>IoT & Systèmes embarqués avancés</li>
-                                <li>Projets de fin d'études en entreprise</li>
-                            </ul>
-                            <p><strong>💼 Débouchés :</strong> Ingénieur réseaux télécoms, Architecte cloud, Consultant en cybersécurité, Chef de projet IT, R&D dans les télécommunications</p>
+                            <p><strong>📌 Présentation :</strong> Formation d'excellence de 3 ans (cycle intégré) combinant l'informatique et les télécommunications.</p>
+                            <p><strong>📚 Programme principal :</strong> Réseaux avancés (5G), Sécurité, Cloud Computing, IA, IoT embarqués</p>
+                            <p><strong>💼 Débouchés :</strong> Ingénieur réseaux télécoms, Architecte cloud, Consultant cybersécurité</p>
                             <button class="btn btn-small" onclick="showIngenieurInfo()">📘 En savoir plus</button>
                         </div>
                     </div>
@@ -508,7 +530,7 @@
                         <div class="card-content">
                             <span class="badge-license badge-master">Mastère Professionnel</span>
                             <h3>Sécurité et Services des Réseaux</h3>
-                            <p>Formation aux métiers de la cybersécurité : audit de sécurité, cryptographie, gestion des risques, sécurité des réseaux mobiles et IoT.</p>
+                            <p>Cybersécurité, audit, cryptographie, sécurité des réseaux mobiles et IoT.</p>
                             <button class="btn btn-small" onclick="showMasterInfo('Sécurité et Services des Réseaux')">En savoir plus</button>
                         </div>
                     </div>
@@ -517,7 +539,7 @@
                         <div class="card-content">
                             <span class="badge-license badge-master">Mastère Professionnel</span>
                             <h3>Services du Web et du Multimédia</h3>
-                            <p>Développement d'applications web avancées, architectures microservices, cloud native, DevOps et gestion de projets digitaux.</p>
+                            <p>Développement web avancé, microservices, DevOps, cloud native, gestion de projets digitaux.</p>
                             <button class="btn btn-small" onclick="showMasterInfo('Services du Web et du Multimédia')">En savoir plus</button>
                         </div>
                     </div>
@@ -526,7 +548,7 @@
                         <div class="card-content">
                             <span class="badge-license badge-master">Mastère de Recherche</span>
                             <h3>Intelligence Artificielle et Analyse des Données</h3>
-                            <p>Machine Learning, Deep Learning, Big Data, traitement automatique du langage naturel, vision par ordinateur et data science.</p>
+                            <p>Machine Learning, Deep Learning, Big Data, NLP, vision par ordinateur.</p>
                             <button class="btn btn-small" onclick="showMasterInfo('Intelligence Artificielle')">En savoir plus</button>
                         </div>
                     </div>
@@ -543,14 +565,7 @@
                         <div class="card-content">
                             <span class="badge-license badge-doctorat">Doctorat en Sciences de l'Informatique</span>
                             <h3>Thèse de Doctorat</h3>
-                            <p><strong>📌 Présentation :</strong> Formation doctorale en partenariat avec l'École Doctorale de l'Université de Sousse. Préparation d'une thèse de 3 ans dans les domaines de recherche de l'ISITCOM.</p>
-                            <p><strong>🔬 Laboratoires de recherche associés :</strong></p>
-                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                <li>LabTIC - Laboratoire des Technologies de l'Information et de la Communication</li>
-                                <li>LISI - Laboratoire d'Informatique et Systèmes Intelligents</li>
-                                <li>CRISTAL - Centre de Recherche en Informatique, Signal et Télécommunications</li>
-                            </ul>
-                            <p><strong>📚 Domaines de recherche :</strong> IA & Machine Learning, IoT & Systèmes embarqués, Cybersécurité, Réseaux 5G/6G, Cloud Computing, Traitement d'images et vision par ordinateur</p>
+                            <p>Formation doctorale en partenariat avec l'École Doctorale de l'Université de Sousse. Laboratoires : LabTIC, LISI, CRISTAL.</p>
                             <button class="btn btn-small" onclick="showDoctoratInfo()">📘 Conditions d'admission</button>
                         </div>
                     </div>
@@ -559,42 +574,58 @@
                         <div class="card-content">
                             <span class="badge-license badge-doctorat">Admission Doctorat</span>
                             <h3>Conditions d'accès</h3>
-                            <ul style="margin-left: 1.5rem;">
+                            <ul style="margin-left: 1rem;">
                                 <li>Master de recherche (ou équivalent)</li>
-                                <li>Classement dans les meilleurs de la promotion</li>
-                                <li>Projet de thèse encadré par un professeur HDR</li>
-                                <li>Concours sur dossier et entretien</li>
+                                <li>Classement dans les meilleurs</li>
+                                <li>Projet de thèse validé</li>
                             </ul>
-                            <p><strong>💼 Débouchés :</strong> Enseignant-chercheur, Chercheur en R&D, Expert en innovation technologique, Consultant senior</p>
-                            <p><strong>🌍 Partenariats :</strong> Cotutelles internationales avec universités françaises, canadiennes et québécoises</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Vie étudiante -->
+            <!-- Vie étudiante - Clubs -->
             <section id="clubs" class="section">
                 <h2 class="section-title">Vie associative & clubs</h2>
+                <p class="section-subtitle">Découvrez les clubs qui animent le campus et développez vos passions</p>
                 <div class="cards-grid">
                     <div class="card" onclick="showClubInfo('ATAST ISITCOM')">
-                        <div class="card-img"><i class="fas fa-robot fa-4x"></i></div>
+                        <div class="card-img" style="background: linear-gradient(135deg, #667eea20, #764ba220);">
+                            <i class="fas fa-robot fa-4x" style="color:#667eea;"></i>
+                        </div>
                         <div class="card-content">
-                            <h3>ATAST ISITCOM</h3>
-                            <p>Club des technologies avancées : ateliers IoT, compétitions régionales, projet "Force" (IA pour le sport) lauréat à ExpoScience.</p>
+                            <span class="badge-license">Club Technologique</span>
+                            <h3>🤖 ATAST ISITCOM</h3>
+                            <p>Club des technologies avancées : ateliers IoT, compétitions nationales, projet "Force" (IA pour le sport) lauréat à ExpoScience.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #00a1ab;">
+                                <i class="fas fa-trophy"></i> Best Club of the Year 2025
+                            </div>
                         </div>
                     </div>
-                    <div class="card" onclick="showClubInfo('IEEE Computer Society')">
-                        <div class="card-img"><i class="fas fa-laptop-code fa-4x"></i></div>
+                    <div class="card" onclick="showClubInfo('Club ARSII')">
+                        <div class="card-img" style="background: linear-gradient(135deg, #f093fb20, #f5576c20);">
+                            <i class="fas fa-microchip fa-4x" style="color:#f5576c;"></i>
+                        </div>
                         <div class="card-content">
-                            <h3>IEEE Computer Society</h3>
-                            <p>Participation à l'AI Caravan 2025, au Regional AI Summit et formation de leaders technologiques.</p>
+                            <span class="badge-license">Club Robotique & IA</span>
+                            <h3>🤖 Club ARSII</h3>
+                            <p>Association Robotique et Systèmes Intelligents et Innovants. Robotique, intelligence artificielle, projets embarqués, participation aux compétitions internationales comme RoboCup et la Coupe de France de Robotique.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #f5576c;">
+                                <i class="fas fa-microchip"></i> Innovation & Compétitions
+                            </div>
                         </div>
                     </div>
                     <div class="card" onclick="showClubInfo('Club Culturel ISITCOM')">
-                        <div class="card-img"><i class="fas fa-film fa-4x"></i></div>
+                        <div class="card-img" style="background: linear-gradient(135deg, #43e97b20, #38f9d720);">
+                            <i class="fas fa-film fa-4x" style="color:#38f9d7;"></i>
+                        </div>
                         <div class="card-content">
-                            <h3>Club Culturel</h3>
-                            <p>Projections, courts-métrages ("Saïr", "The Bus") et rencontres inter-établissements avec l'École ISIS.</p>
+                            <span class="badge-license">Club Culturel</span>
+                            <h3>🎬 Club Culturel</h3>
+                            <p>Projections de films, courts-métrages ("Saïr", "The Bus"), rencontres avec des réalisateurs et échanges inter-établissements avec l'École ISIS.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #38f9d7;">
+                                <i class="fas fa-video"></i> Création & Découverte
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -608,11 +639,10 @@
                         <div class="card-content">
                             <h3><i class="fas fa-book-open"></i> Cours par formation</h3>
                             <div class="resource-list">
-                                <div class="resource-item" onclick="downloadCourse('Licence Multimédia - Cours')"><i class="fas fa-download"></i> Licence Multimédia & Web</div>
+                                <div class="resource-item" onclick="downloadCourse('Licence Multimédia - Cours')"><i class="fas fa-download"></i> Licence Multimédia</div>
                                 <div class="resource-item" onclick="downloadCourse('Licence IoT - Cours')"><i class="fas fa-download"></i> Licence IoT & Embarqué</div>
                                 <div class="resource-item" onclick="downloadCourse('Licence Télécom - Cours')"><i class="fas fa-download"></i> Licence Télécom & Réseaux</div>
-                                <div class="resource-item" onclick="downloadCourse('Cycle Ingénieur - Cours')"><i class="fas fa-download"></i> Cycle Ingénieur Téléinformatique</div>
-                                <div class="resource-item" onclick="downloadCourse('Masters - Cours')"><i class="fas fa-download"></i> Masters (toutes spécialités)</div>
+                                <div class="resource-item" onclick="downloadCourse('Cycle Ingénieur - Cours')"><i class="fas fa-download"></i> Cycle Ingénieur</div>
                             </div>
                         </div>
                     </div>
@@ -620,7 +650,7 @@
                         <div class="card-content">
                             <h3><i class="fas fa-history"></i> Anciens examens</h3>
                             <div class="resource-list">
-                                <div class="resource-item" onclick="showExam('Licences - Examens 2022-2024')"><i class="fas fa-file-pdf"></i> Examens Licences (2022-2024)</div>
+                                <div class="resource-item" onclick="showExam('Licences - Examens')"><i class="fas fa-file-pdf"></i> Examens Licences</div>
                                 <div class="resource-item" onclick="showExam('Cycle Ingénieur - Examens')"><i class="fas fa-file-pdf"></i> Examens Cycle Ingénieur</div>
                                 <div class="resource-item" onclick="showExam('Masters - Examens')"><i class="fas fa-file-pdf"></i> Examens Masters</div>
                             </div>
@@ -630,9 +660,9 @@
                         <div class="card-content">
                             <h3><i class="fas fa-graduation-cap"></i> Anciens rapports PFE</h3>
                             <div class="resource-list">
-                                <div class="resource-item" onclick="showPFE('PFE - IoT Santé')"><i class="fas fa-microchip"></i> Application IoT pour suivi médical</div>
+                                <div class="resource-item" onclick="showPFE('PFE - IoT Santé')"><i class="fas fa-microchip"></i> Application IoT santé</div>
                                 <div class="resource-item" onclick="showPFE('PFE - IA & Data Science')"><i class="fas fa-brain"></i> Système de recommandation IA</div>
-                                <div class="resource-item" onclick="showPFE('PFE - Cybersécurité 5G')"><i class="fas fa-shield-alt"></i> Sécurisation infrastructure 5G</div>
+                                <div class="resource-item" onclick="showPFE('PFE - Cybersécurité 5G')"><i class="fas fa-shield-alt"></i> Sécurisation 5G</div>
                             </div>
                         </div>
                     </div>
@@ -652,7 +682,7 @@
                 </div>
                 <div class="event-item">
                     <div class="event-date"><div class="day">05</div>Avr</div>
-                    <div><h3>Conférence IA & Smart Cities</h3><p>Avec des experts internationaux – organisée par IEEE ISITCOM et le LabTIC.</p></div>
+                    <div><h3>Conférence IA & Smart Cities</h3><p>Avec des experts internationaux – organisée par le LabTIC et l'ARSII.</p></div>
                 </div>
                 <div class="event-item">
                     <div class="event-date"><div class="day">20</div>Mai</div>
@@ -660,7 +690,7 @@
                 </div>
             </section>
 
-            <!-- Formulaire d'inscription étudiants -->
+            <!-- Formulaire d'inscription -->
             <section id="inscription" class="section">
                 <h2 class="section-title">📝 Inscription Étudiante</h2>
                 <p class="section-subtitle">Rejoignez la communauté ISITCOM en remplissant ce formulaire</p>
@@ -693,7 +723,7 @@
                             <label for="classe">Classe / Formation *</label>
                             <select id="classe" name="classe" required>
                                 <option value="">Sélectionnez votre formation</option>
-                                <option value="Licence Multimédia & Web">Licence Multimédia & Web</option>
+                                <option value="Licence Multimédia">Licence Multimédia</option>
                                 <option value="Licence IoT & Embarqué">Licence IoT & Embarqué</option>
                                 <option value="Licence Télécom & Réseaux">Licence Télécom & Réseaux</option>
                                 <option value="Cycle Ingénieur Téléinformatique">Cycle Ingénieur Téléinformatique</option>
@@ -741,7 +771,7 @@
             <div class="footer-section"><h4>Liens utiles</h4><p>📘 Moodle • 📚 Bibliothèque numérique • 🎓 Espace carrière</p></div>
             <div class="footer-section"><h4>Suivez-nous</h4><div class="social-links"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div>
         </div>
-        <div class="footer-bottom"><p>© 2027 ISITCOM – Projet PFA (Méthodologie Agile) – Données actualisées</p></div>
+        <div class="footer-bottom"><p>© 2026 ISITCOM – Projet PFA (Méthodologie Agile) – Données actualisées</p></div>
     </footer>
 
     <!-- Modal -->
@@ -773,122 +803,81 @@
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
         window.onclick = function(e) { if (e.target == document.getElementById('modal')) closeModal(); };
 
-        // Validation et soumission du formulaire
+        // Formulaire
         document.getElementById('studentForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             let isValid = true;
             
-            // Validation nom
             const nom = document.getElementById('nom').value.trim();
-            if (nom === '') {
-                document.getElementById('error-nom').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('error-nom').style.display = 'none';
-            }
+            if (nom === '') { document.getElementById('error-nom').style.display = 'block'; isValid = false; }
+            else { document.getElementById('error-nom').style.display = 'none'; }
             
-            // Validation prénom
             const prenom = document.getElementById('prenom').value.trim();
-            if (prenom === '') {
-                document.getElementById('error-prenom').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('error-prenom').style.display = 'none';
-            }
+            if (prenom === '') { document.getElementById('error-prenom').style.display = 'block'; isValid = false; }
+            else { document.getElementById('error-prenom').style.display = 'none'; }
             
-            // Validation CIN (8 chiffres)
             const cin = document.getElementById('cin').value.trim();
             const cinRegex = /^[0-9]{8}$/;
-            if (cin === '' || !cinRegex.test(cin)) {
-                document.getElementById('error-cin').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('error-cin').style.display = 'none';
-            }
+            if (cin === '' || !cinRegex.test(cin)) { document.getElementById('error-cin').style.display = 'block'; isValid = false; }
+            else { document.getElementById('error-cin').style.display = 'none'; }
             
-            // Validation classe
             const classe = document.getElementById('classe').value;
-            if (classe === '') {
-                document.getElementById('error-classe').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('error-classe').style.display = 'none';
-            }
+            if (classe === '') { document.getElementById('error-classe').style.display = 'block'; isValid = false; }
+            else { document.getElementById('error-classe').style.display = 'none'; }
             
-            // Validation email
             const email = document.getElementById('email').value.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === '' || !emailRegex.test(email)) {
-                document.getElementById('error-email').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('error-email').style.display = 'none';
-            }
+            if (email === '' || !emailRegex.test(email)) { document.getElementById('error-email').style.display = 'block'; isValid = false; }
+            else { document.getElementById('error-email').style.display = 'none'; }
             
             if (isValid) {
-                // Afficher message de succès
                 const successMsg = document.getElementById('formSuccessMessage');
                 successMsg.style.display = 'block';
-                
-                // Réinitialiser le formulaire
                 document.getElementById('studentForm').reset();
-                
-                // Cacher le message après 5 secondes
-                setTimeout(() => {
-                    successMsg.style.display = 'none';
-                }, 5000);
-                
-                // Afficher une confirmation dans la modal
+                setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
                 showModal('✅ Inscription confirmée', `Merci ${prenom} ${nom} pour votre inscription !<br><br>📌 Formation : ${classe}<br>📧 Un email de confirmation a été envoyé à ${email}<br><br>Bienvenue à l'ISITCOM !`);
             }
         });
         
-        // Fonctions d'affichage existantes
+        // Fonctions d'affichage
         function showLicenceDetails(licence) {
             const messages = {
-                'Multimédia': '<strong>Licence Technologies du Multimédia et du Web</strong><br><br>📚 <strong>Programme détaillé :</strong><br>- Semestre 1-2 : Fondamentaux (Algorithmique, Programmation, Mathématiques)<br>- Semestre 3-4 : Spécialisation (React, Node.js, Bases de données, UX/UI)<br>- Semestre 5-6 : Projet professionnel et stage<br><br>🎯 <strong>Compétences acquises :</strong><br>Développement full-stack, design d\'interfaces, gestion de projets web, création de contenus multimédia.',
-                'IoT': '<strong>Licence Systèmes Embarqués & Internet des Objets (IoT)</strong><br><br>📚 <strong>Programme détaillé :</strong><br>- Architecture des systèmes embarqués<br>- Programmation Arduino/Raspberry Pi<br>- Réseaux sans fil (LoRa, ZigBee, BLE)<br>- Protocoles IoT (MQTT, CoAP)<br>- Traitement du signal et des données<br><br>🎯 <strong>Compétences acquises :</strong><br>Conception d\'objets connectés, développement embarqué, intégration de solutions IoT.',
-                'Télécom': '<strong>Licence Technologies des Communications</strong><br><br>📚 <strong>Programme détaillé :</strong><br>- Réseaux IP et administration<br>- Télécommunications optiques et radio<br>- Sécurité des réseaux<br>- Virtualisation et Cloud Computing<br>- Projet de télécommunications<br><br>🎯 <strong>Compétences acquises :</strong><br>Administration réseaux, gestion d\'infrastructures télécoms, cybersécurité, déploiement de solutions de communication.'
+                'Multimédia': '<strong>Licence Technologies du Multimédia</strong><br><br>📚 Programme : React, Node.js, PHP, UI/UX, Graphisme 3D<br>🎯 Débouchés : Développeur full-stack, Chef de projet digital',
+                'IoT': '<strong>Licence IoT & Embarqué</strong><br><br>📚 Programme : Arduino, Raspberry Pi, Réseaux IoT, Traitement du signal<br>🎯 Débouchés : Ingénieur IoT, Concepteur embarqué',
+                'Télécom': '<strong>Licence Technologies des Communications</strong><br><br>📚 Programme : Réseaux IP, Télécom optiques, Cybersécurité<br>🎯 Débouchés : Admin réseaux, Consultant cybersécurité'
             };
-            showModal(`📘 ${licence}`, messages[licence] || 'Informations disponibles sur le site officiel.');
+            showModal(`📘 ${licence}`, messages[licence]);
         }
 
         function showIngenieurInfo() {
-            showModal('🎓 Cycle Ingénieur en Téléinformatique', '<strong>Diplôme National d\'Ingénieur (accrédité CTI)</strong><br><br><strong>📅 Organisation :</strong> 3 ans (5 semestres + stage de fin d\'études)<br><br><strong>📚 Matières principales :</strong><br>• Réseaux avancés (5G, SDN, NFV)<br>• Cybersécurité et Cryptographie<br>• Cloud Computing et Virtualisation<br>• Intelligence Artificielle<br>• IoT et Systèmes embarqués<br>• Management et Entrepreneuriat<br><br><strong>💼 Stage :</strong> Stage ouvrier (1 mois) + Stage technique (2 mois) + Projet de fin d\'études (6 mois en entreprise)<br><br><strong>🌍 Partenariats :</strong> Échanges avec universités françaises (UTC, INSA) et canadiennes.');
+            showModal('🎓 Cycle Ingénieur', '<strong>Diplôme National d\'Ingénieur en Téléinformatique</strong><br><br>📅 3 ans<br>📚 Réseaux 5G, Cybersécurité, Cloud, IA, IoT<br>💼 Stage de 6 mois en entreprise<br>🌍 Partenariats internationaux');
         }
 
         function showMasterInfo(master) {
             const messages = {
-                'Sécurité et Services des Réseaux': '<strong>Mastère Professionnel en Sécurité et Services des Réseaux</strong><br><br>Formation aux métiers de la cybersécurité : audit, cryptographie, gestion des risques, sécurité des réseaux mobiles.',
-                'Services du Web et du Multimédia': '<strong>Mastère Professionnel en Services du Web et du Multimédia</strong><br><br>Développement web avancé, microservices, DevOps, cloud native, gestion de projets digitaux.',
-                'Intelligence Artificielle': '<strong>Mastère de Recherche en Intelligence Artificielle et Analyse des Données</strong><br><br>Machine Learning, Deep Learning, Big Data, NLP, Vision par ordinateur, Data Science.'
+                'Sécurité et Services des Réseaux': '<strong>Mastère en Cybersécurité</strong><br>Audit, cryptographie, sécurité IoT',
+                'Services du Web et du Multimédia': '<strong>Mastère Web & Multimédia</strong><br>Microservices, DevOps, Cloud native',
+                'Intelligence Artificielle': '<strong>Mastère IA & Data Science</strong><br>Machine Learning, Deep Learning, Big Data'
             };
-            showModal(`📘 ${master}`, messages[master] || 'Plus d\'informations disponibles auprès du département.');
+            showModal(`📘 ${master}`, messages[master]);
         }
 
         function showDoctoratInfo() {
-            showModal('🎓 Doctorat en Sciences de l\'Informatique', '<strong>Conditions d\'admission :</strong><br><br>• Master de recherche (ou équivalent) avec mention<br>• Classement dans les premiers de la promotion<br>• Projet de thèse validé par un directeur HDR<br>• Concours sur dossier et entretien<br><br><strong>📅 Durée :</strong> 3 ans (renouvelable)<br><br><strong>💰 Financements :</strong> Bourses d\'excellence, contrats CIFRE avec entreprises, mobilités internationales<br><br><strong>🔬 Laboratoires :</strong> LabTIC, LISI, CRISTAL');
+            showModal('🎓 Doctorat', 'Conditions : Master recherche, projet de thèse, concours sur dossier. Laboratoires : LabTIC, LISI, CRISTAL');
         }
 
         function showClubInfo(clubName) {
             const messages = {
-                'ATAST ISITCOM': 'ATAST est le club des technologies avancées. Lauréat "Best Club of the Year" 2025 à la B-TECH Competition. Activités : ateliers IoT, hackathons, compétitions nationales et internationales. Rejoignez-les pour participer à des projets innovants !',
-                'IEEE Computer Society': 'IEEE Computer Society ISITCOM permet aux étudiants de se connecter au réseau international d\'innovation. Participation à l\'AI Caravan 2025, au Regional AI Summit. Formations en leadership technologique.',
-                'Club Culturel ISITCOM': 'Le Club Culturel organise des projections de films, des rencontres avec des réalisateurs, et des échanges inter-établissements. Découvrez les courts-métrages "Saïr" et "The Bus" réalisés par des étudiants de l\'institut !'
+                'ATAST ISITCOM': '🏆 Club des technologies avancées. Activités : IoT, hackathons, compétitions. Lauréat "Best Club of the Year" 2025.',
+                'Club ARSII': '🤖 Association Robotique et Systèmes Intelligents. Robotique, IA embarquée, compétitions RoboCup. Rejoignez l\'innovation !',
+                'Club Culturel ISITCOM': '🎬 Projections, courts-métrages, rencontres avec réalisateurs. Découvrez "Saïr" et "The Bus" !'
             };
-            showModal(`🎭 ${clubName}`, messages[clubName] || `Merci de votre intérêt pour ${clubName} ! Un responsable vous contactera prochainement.`);
+            showModal(`🎭 ${clubName}`, messages[clubName] || `Merci de votre intérêt pour ${clubName} !`);
         }
 
-        function downloadCourse(course) { 
-            showModal('📖 Téléchargement cours', `Le cours "${course}" est disponible sur la plateforme Moodle de l'ISITCOM. Connectez-vous avec vos identifiants étudiants pour accéder à tous les documents.`); 
-        }
-        function showExam(exam) { 
-            showModal('📄 Anciens examens', `Les sujets d'examen "${exam}" sont accessibles dans la bibliothèque numérique de l'ISITCOM. Consultez votre département pour le lien direct.`); 
-        }
-        function showPFE(pfe) { 
-            showModal('📑 Rapport PFE', `Le rapport "${pfe}" est consultable au sein du laboratoire de recherche. Contactez votre encadrant pour y accéder.`); 
-        }
+        function downloadCourse(course) { showModal('📖 Téléchargement', `Le cours "${course}" est sur Moodle ISITCOM.`); }
+        function showExam(exam) { showModal('📄 Anciens examens', `Les sujets "${exam}" sont dans la bibliothèque numérique.`); }
+        function showPFE(pfe) { showModal('📑 Rapport PFE', `Le rapport "${pfe}" est consultable au laboratoire.`); }
 
         // Animation au scroll
         const observer = new IntersectionObserver((entries) => { 
