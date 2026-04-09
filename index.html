@@ -46,10 +46,10 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.5;
-            transition: all 0.3s;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* ===== ANIMATIONS ===== */
+        /* ===== ANIMATIONS PROFESSIONNELLES ===== */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -57,6 +57,14 @@
         @keyframes slideUp {
             from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         @keyframes underlineExpand {
             from { width: 0; }
@@ -77,6 +85,44 @@
             70% { box-shadow: 0 0 0 10px rgba(44,125,160,0); }
             100% { box-shadow: 0 0 0 0 rgba(44,125,160,0); }
         }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Classes d'animation */
+        .animate-fadeIn { animation: fadeIn 0.8s ease forwards; }
+        .animate-slideUp { animation: slideUp 0.6s ease forwards; }
+        .animate-slideInLeft { animation: slideInLeft 0.6s ease forwards; }
+        .animate-slideInRight { animation: slideInRight 0.6s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* Hover animations */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+        .hover-grow:hover {
+            transform: scale(1.02);
+        }
+        .hover-icon {
+            transition: transform 0.2s ease;
+        }
+        .hover-icon:hover {
+            transform: translateX(5px);
+        }
 
         /* ===== HEADER ===== */
         header {
@@ -87,6 +133,7 @@
             z-index: 1000;
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(10px);
+            transition: background 0.3s;
         }
 
         nav {
@@ -107,6 +154,10 @@
             height: 45px;
             width: auto;
             border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
         }
         .logo-text {
             font-weight: 700;
@@ -130,7 +181,21 @@
             color: var(--text-secondary);
             font-weight: 500;
             font-size: 0.9rem;
-            transition: color 0.2s;
+            transition: color 0.2s, transform 0.2s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
         }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
         .mobile-menu { display: none; font-size: 1.4rem; cursor: pointer; }
@@ -155,6 +220,7 @@
             text-align: center;
             margin-top: 65px;
             position: relative;
+            overflow: hidden;
         }
 
         .hero h1 {
@@ -200,6 +266,24 @@
             transition: all 0.2s;
             cursor: pointer;
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        .btn:hover::before {
+            width: 200px;
+            height: 200px;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
         .btn-small { padding: 0.4rem 1.2rem; font-size: 0.8rem; }
@@ -233,6 +317,10 @@
             background: var(--accent);
             margin: 0.7rem auto;
             border-radius: 2px;
+            transition: width 0.3s;
+        }
+        .section:hover .section-title:after {
+            width: 100px;
         }
 
         /* ===== CARDS ===== */
@@ -316,6 +404,10 @@
             border-radius: 24px;
             padding: 1.5rem;
             border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+        .form-card:hover {
+            transform: translateY(-3px);
         }
         .form-group {
             margin-bottom: 1.2rem;
@@ -327,6 +419,7 @@
             display: block;
             margin-bottom: 0.4rem;
             color: var(--text-primary);
+            transition: color 0.2s;
         }
         .form-group input, .form-group select {
             width: 100%;
@@ -359,6 +452,7 @@
             font-size: 0.7rem;
             display: none;
             margin-top: 0.3rem;
+            animation: slideUp 0.2s ease;
         }
         .form-row {
             display: grid;
@@ -404,6 +498,11 @@
             border-radius: 30px;
             background: var(--bg-primary);
             flex: 1;
+            transition: all 0.2s;
+        }
+        .resource-toolbar input:focus, .resource-toolbar select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(44,125,160,0.2);
         }
         .resource-grid {
             display: grid;
@@ -431,6 +530,10 @@
             justify-content: center;
             color: white;
             margin-bottom: 0.8rem;
+            transition: transform 0.3s;
+        }
+        .resource-card:hover .resource-card-icon {
+            transform: rotate(5deg);
         }
         .resource-tag {
             background: var(--accent-light);
@@ -480,10 +583,12 @@
             padding: 0.4rem 1rem; 
             font-weight: 600; 
             cursor: pointer;
+            transition: all 0.2s;
         }
         .event-link-btn.primary { background: var(--accent); color: white; }
+        .event-link-btn.primary:hover { background: var(--accent-dark); transform: scale(1.02); }
 
-        /* ===== FOOTER ===== */
+        /* ===== FOOTER AVEC LIENS RÉELS ===== */
         footer {
             background: #0f2b3d;
             color: #cbd5e1;
@@ -493,8 +598,17 @@
         }
         .footer-grid { max-width: 1400px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 2rem; }
         .footer-section h4 { color: white; margin-bottom: 1rem; }
-        .social-links a { color: #cbd5e1; margin-right: 1rem; font-size: 1.1rem; transition: all 0.2s; }
-        .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
+        .social-links a { 
+            color: #cbd5e1; 
+            margin-right: 1rem; 
+            font-size: 1.3rem; 
+            transition: all 0.3s; 
+            display: inline-block;
+        }
+        .social-links a:hover { 
+            color: var(--accent); 
+            transform: translateY(-3px) scale(1.1);
+        }
         .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #1e3a5f; font-size: 0.75rem; }
 
         /* ===== MODAL ===== */
@@ -523,14 +637,143 @@
             top: 1rem; right: 1rem;
             font-size: 1.3rem;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .close-modal:hover { transform: scale(1.1); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--header-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 0.8rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                display: none;
+            }
+            .nav-links a {
+                padding: 0.5rem;
+                width: 100%;
+                text-align: center;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .section {
+                padding: 1.2rem;
+                margin: 1rem 0;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .events-shell {
+                grid-template-columns: 1fr;
+            }
+            .calendar-card, .event-panel {
+                padding: 1rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .resource-toolbar {
+                flex-direction: column;
+            }
+            .resource-toolbar input, .resource-toolbar select, .resource-toolbar .btn {
+                width: 100%;
+            }
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        @media (max-width: 800px) {
-            .nav-links { display: none; }
-            .mobile-menu { display: block; }
-            .hero h1 { font-size: 2rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .events-shell { grid-template-columns: 1fr; }
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+            .container {
+                padding: 0.8rem;
+            }
+            .hero {
+                padding: 6rem 1rem 3rem;
+                margin-top: 60px;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .gallery-item {
+                height: 130px;
+            }
+            .form-group input, .form-group select {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .event-card-date {
+                min-width: 65px;
+                padding: 0.5rem;
+            }
+            .event-card-date .day {
+                font-size: 1.2rem;
+            }
+            .event-card-date .month {
+                font-size: 0.65rem;
+            }
+            .resource-card-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .resource-download {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+            .modal-content {
+                padding: 1rem;
+                width: 95%;
+            }
+            .footer-section h4 {
+                font-size: 0.9rem;
+            }
+            .footer-section p, .footer-bottom p {
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -553,7 +796,6 @@
     </header>
 
     <main>
-        <!-- Hero section améliorée -->
         <section id="home" class="hero">
             <h1>ISITCOM</h1>
             <div class="hero-subtitle">Institut Supérieur d'Informatique et des Technologies de Communication<br>Hammam Sousse - Université de Sousse</div>
@@ -562,7 +804,7 @@
         </section>
 
         <div class="container">
-            <!-- Section Faculté -->
+            <!-- Faculté -->
             <section id="faculte" class="section">
                 <h2 class="section-title">L'ISITCOM en bref</h2>
                 <div class="cards-grid">
@@ -663,7 +905,7 @@
                 </div>
             </section>
 
-            <!-- Formulaire d'inscription amélioré -->
+            <!-- Inscription améliorée -->
             <section id="inscription" class="section">
                 <h2 class="section-title">Inscription étudiante</h2>
                 <div class="form-card">
@@ -717,7 +959,7 @@
                 <div class="cards-grid">
                     <div class="card"><div class="card-content"><i class="fas fa-map-marker-alt"></i><h3>Adresse</h3><p>Route GP1, Hammam Sousse 4011</p></div></div>
                     <div class="card"><div class="card-content"><i class="fas fa-envelope"></i><h3>Email</h3><p>contact@isitcom.rnu.tn</p></div></div>
-                    <div class="card"><div class="card-content"><i class="fas fa-globe"></i><h3>Site</h3><p>isitcom.rnu.tn</p></div></div>
+                    <div class="card"><div class="card-content"><i class="fas fa-globe"></i><h3>Site officiel</h3><p>https://isitcom.rnu.tn</p></div></div>
                 </div>
             </section>
         </div>
@@ -725,11 +967,26 @@
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-section"><h4>ISITCOM</h4><p>Hammam Sousse - Tunisie<br>Créée en 2001</p></div>
-            <div class="footer-section"><h4>Formations</h4><p>Licences • Ingénieur • Masters • Doctorat</p></div>
-            <div class="footer-section"><h4>Suivez-nous</h4><div class="social-links"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div>
+            <div class="footer-section">
+                <h4>ISITCOM</h4>
+                <p>Institut Supérieur d'Informatique et des Technologies de Communication<br>Hammam Sousse - Tunisie<br>Créée en 2001</p>
+            </div>
+            <div class="footer-section">
+                <h4>Formations</h4>
+                <p>Licences • Ingénieur • Masters • Doctorat</p>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/ISITCOM/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                    <a href="https://tn.linkedin.com/school/isitcom/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/isitcom_official/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
-        <div class="footer-bottom"><p>© 2026 ISITCOM – Projet PFA – Méthodologie Agile</p></div>
+        <div class="footer-bottom">
+            <p>© 2026 ISITCOM – Projet PFA – Méthodologie Agile</p>
+        </div>
     </footer>
 
     <div id="modal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><h3 id="modal-title"></h3><div id="modal-message"></div><button onclick="closeModal()" class="btn btn-small">Fermer</button></div></div>
@@ -787,19 +1044,34 @@
             let f = document.getElementById('courseFormationFilter').value;
             let filtered = courses.filter(c => f === 'all' || c.formation === f);
             document.getElementById('courseGrid').innerHTML = filtered.map(c => `
-                <div class="resource-card"><div class="resource-card-icon"><i class="fas fa-book-open"></i></div><h3>${c.title}</h3><p>${c.teacher}</p><a href="#" class="resource-download"><i class="fas fa-download"></i> Télécharger</a></div>
+                <div class="resource-card">
+                    <div class="resource-card-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>${c.title}</h3>
+                    <p>${c.teacher}</p>
+                    <a href="#" class="resource-download"><i class="fas fa-download"></i> Télécharger</a>
+                </div>
             `).join('');
         }
 
         function renderResources() {
             document.getElementById('resourceGrid').innerHTML = resources.map(r => `
-                <div class="resource-card"><div class="resource-card-icon"><i class="fas fa-file-alt"></i></div><h3>${r.title}</h3><span class="resource-tag">${r.type}</span><p>${r.desc}</p><a href="#" class="resource-download"><i class="fas fa-download"></i> Télécharger</a></div>
+                <div class="resource-card">
+                    <div class="resource-card-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>${r.title}</h3>
+                    <span class="resource-tag">${r.type}</span>
+                    <p>${r.desc}</p>
+                    <a href="#" class="resource-download"><i class="fas fa-download"></i> Télécharger</a>
+                </div>
             `).join('');
         }
 
         function renderEvents() {
             document.getElementById('eventList').innerHTML = events.map(e => `
-                <div class="event-list-card"><h3>${e.title}</h3><p>📅 ${e.date} • 📍 ${e.location}</p><button class="event-link-btn primary" onclick="openEventDetails(${e.id})">S'inscrire</button></div>
+                <div class="event-list-card">
+                    <h3>${e.title}</h3>
+                    <p>📅 ${e.date} • 📍 ${e.location}</p>
+                    <button class="event-link-btn primary" onclick="openEventDetails(${e.id})">S'inscrire</button>
+                </div>
             `).join('');
         }
 
@@ -820,7 +1092,7 @@
         function showDoctoratInfo() { showModal("Doctorat", "Conditions : Master recherche, projet de thèse, concours sur dossier."); }
         function openEventDetails(id) { let e = events.find(x => x.id === id); showModal(e.title, `${e.desc}<br><br>📅 ${e.date}<br>📍 ${e.location}<br>👥 Places restantes : ${e.capacity - e.registered}`); }
 
-        // ===== FORMULAIRE AVEC VALIDATION EN TEMPS RÉEL =====
+        // ===== FORMULAIRE AVEC VALIDATION =====
         const form = document.getElementById('studentForm');
         const nomInput = document.getElementById('nom');
         const prenomInput = document.getElementById('prenom');
